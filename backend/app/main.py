@@ -7,6 +7,8 @@ from app.api.routes import (
     areas,
     auth,
     bookings,
+    chart_accounts,
+    financial,
     health,
     pets,
     residents,
@@ -28,6 +30,8 @@ app.include_router(vehicles.router)
 app.include_router(pets.router)
 app.include_router(areas.router)
 app.include_router(bookings.router)
+app.include_router(chart_accounts.router)
+app.include_router(financial.router)
 
 
 @app.get("/")

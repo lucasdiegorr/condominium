@@ -71,11 +71,11 @@
 
 ## 10. Financial (financial)
 
-- [ ] 10.1 Chart-of-accounts endpoints per condominium (expense/income)
-- [ ] 10.2 Expense and income entry endpoints
-- [ ] 10.3 Ideal-fraction allocation and monthly invoice generation per unit
-- [ ] 10.4 Manual payment recording and paid/pending/overdue status
-- [ ] 10.5 Balance sheet: expenses × incomes per category, period result, per-unit summary
+- [x] 10.1 Chart-of-accounts endpoints per condominium (expense/income)
+- [x] 10.2 Expense and income entry endpoints
+- [x] 10.3 Ideal-fraction allocation and monthly invoice generation per unit
+- [x] 10.4 Manual payment recording and paid/pending/overdue status
+- [x] 10.5 Balance sheet: expenses × incomes per category, period result, per-unit summary
 - [ ] 10.6 Financial screens scoped by role (síndico operation; resident consultation of their own unit)
 
 ## 11. Frontend — application and UX
