@@ -1,0 +1,39 @@
+# Pre-commit hooks configuration
+# Install once per developer: pre-commit install
+# Update pinned revisions: pre-commit autoupdate
+
+repos:
+  # Repository hygiene + git discipline checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: no-commit-to-branch
+        args: [--branch, master, --branch, main]
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: detect-private-key
+      - id: debug-statements
+
+  # Python quality gates (backend lives in backend/)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  # Every feature MUST start as a valid OpenSpec change
+  - repo: local
+    hooks:
+      - id: openspec-validate
+        name: openspec validate
+        entry: openspec validate --all --no-interactive
+        language: system
+        pass_filenames: false
+        always_run: true
