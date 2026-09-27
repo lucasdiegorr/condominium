@@ -1,0 +1,40 @@
+{
+  "app": {
+    "title": "Condominium Management",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Retry",
+    "logout": "Sign out"
+  },
+  "login": {
+    "title": "Sign in",
+    "email": "E-mail",
+    "password": "Password",
+    "submit": "Sign in",
+    "invalidCredentials": "Invalid e-mail or password.",
+    "genericError": "Unable to sign in. Try again."
+  },
+  "selection": {
+    "title": "Select a condominium",
+    "empty": "You are not associated with any condominium yet. Contact your administrator.",
+    "select": "Enter"
+  },
+  "navigation": {
+    "home": "Home",
+    "condominiums": "Condominiums",
+    "users": "Users",
+    "roles": "Roles",
+    "units": "Units",
+    "residents": "Residents",
+    "vehicles": "Vehicles",
+    "pets": "Pets",
+    "bookings": "Bookings",
+    "commonAreas": "Common areas",
+    "financial": "Financial"
+  },
+  "home": {
+    "welcome": "Welcome",
+    "condominium": "Active condominium",
+    "noScope": "You are signed in but have not selected a condominium."
+  }
+}

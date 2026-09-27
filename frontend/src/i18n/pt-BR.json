@@ -1,0 +1,40 @@
+{
+  "app": {
+    "title": "Gestão de Condomínios",
+    "loading": "Carregando...",
+    "error": "Algo deu errado",
+    "retry": "Tentar novamente",
+    "logout": "Sair"
+  },
+  "login": {
+    "title": "Entrar",
+    "email": "E-mail",
+    "password": "Senha",
+    "submit": "Entrar",
+    "invalidCredentials": "E-mail ou senha inválidos.",
+    "genericError": "Não foi possível entrar. Tente novamente."
+  },
+  "selection": {
+    "title": "Selecione um condomínio",
+    "empty": "Você ainda não está associado a nenhum condomínio. Fale com o administrador.",
+    "select": "Entrar"
+  },
+  "navigation": {
+    "home": "Início",
+    "condominiums": "Condomínios",
+    "users": "Usuários",
+    "roles": "Perfis",
+    "units": "Unidades",
+    "residents": "Moradores",
+    "vehicles": "Veículos",
+    "pets": "Pets",
+    "bookings": "Reservas",
+    "commonAreas": "Áreas comuns",
+    "financial": "Financeiro"
+  },
+  "home": {
+    "welcome": "Bem-vindo",
+    "condominium": "Condomínio ativo",
+    "noScope": "Você entrou, mas ainda não selecionou um condomínio."
+  }
+}
