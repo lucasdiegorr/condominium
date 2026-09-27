@@ -54,6 +54,34 @@ async def current_user_id(
         raise _Unauthorized() from exc
 
 
+async def current_global_admin(
+    credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
+    session: AsyncSession = Depends(get_db),
+) -> User:
+    """Require a valid identity token for a user with the global admin flag.
+
+    Used on admin routes that operate outside any particular condominium
+    (listing and creating condominiums) — no scope exists yet.
+    """
+    try:
+        payload = decode_token(_extract_token(credentials))
+    except jwt.PyJWTError as exc:
+        raise _Unauthorized() from exc
+    if payload.get("type") != TOKEN_TYPE_IDENTITY:
+        raise _Unauthorized()
+    try:
+        user_id = int(payload["sub"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise _Unauthorized() from exc
+
+    user = await session.get(User, user_id)
+    if user is None or not user.active:
+        raise _Unauthorized()
+    if not user.is_global_admin:
+        raise _forbidden()
+    return user
+
+
 async def current_scope(
     credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
     session: AsyncSession = Depends(get_db),
@@ -125,6 +153,19 @@ def require_permission(permission: str) -> Callable:
         return scope
 
     return dependency
+
+
+async def require_scope_matches(
+    condominium_id: int, scope: Scope = Depends(current_scope)
+) -> Scope:
+    """Dependency: reject when the path condominium differs from the scope.
+
+    Even the global administrator only operates data through the condominium
+    they selected — the scope filter stays the single authority (design D2).
+    """
+    if scope.condominium_id != condominium_id:
+        raise _forbidden()
+    return scope
 
 
 async def get_scoped_or_403(

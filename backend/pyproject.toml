@@ -22,4 +22,5 @@ extend-immutable-calls = [
   "fastapi.Header",
   "fastapi.Cookie",
   "fastapi.Form",
+  "app.api.deps.require_permission",
 ]

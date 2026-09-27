@@ -28,19 +28,19 @@
 
 ## 4. RBAC and role administration (access-control)
 
-- [ ] 4.1 Centralized permission matrix in the backend (role → declarative permissions)
-- [ ] 4.2 Administrator role-management endpoints: create/edit/remove `membership_roles` and `member_links` (unit selection for links)
-- [ ] 4.3 Global administrator operation in any condominium (elevated permissions inside the scope)
-- [ ] 4.4 Rule: creating a unit link for a user guarantees a `membership`; a resident without an account gets only a `member_link`
+- [x] 4.1 Centralized permission matrix in the backend (role → declarative permissions)
+- [x] 4.2 Administrator role-management endpoints: create/edit/remove `membership_roles` and `member_links` (unit selection for links)
+- [x] 4.3 Global administrator operation in any condominium (elevated permissions inside the scope)
+- [x] 4.4 Rule: creating a unit link for a user guarantees a `membership`; a resident without an account gets only a `member_link`
 - [ ] 4.5 Administrator screen: binding a user/person to roles per condominium (unit selection when applicable)
-- [ ] 4.6 Permission tests per role (403 for actions outside the role, including function management by the síndico)
+- [x] 4.6 Permission tests per role (403 for actions outside the role, including function management by the síndico)
 
 ## 5. Condominiums (condominium-management)
 
-- [ ] 5.1 Condominium CRUD endpoints by the administrator, with deactivation preserving data
-- [ ] 5.2 User ↔ condominium association endpoints by the administrator
-- [ ] 5.3 Central `condominium_id` filter applied to all domain repositories
-- [ ] 5.4 Cross-condominium isolation tests (cross access responds 403 without exposing data)
+- [x] 5.1 Condominium CRUD endpoints by the administrator, with deactivation preserving data
+- [x] 5.2 User ↔ condominium association endpoints by the administrator
+- [x] 5.3 Central `condominium_id` filter applied to all domain repositories
+- [x] 5.4 Cross-condominium isolation tests (cross access responds 403 without exposing data)
 
 ## 6. Persons and residents (people)
 
