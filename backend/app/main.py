@@ -4,7 +4,9 @@ from fastapi import FastAPI
 
 from app.api.routes import (
     admin,
+    areas,
     auth,
+    bookings,
     health,
     pets,
     residents,
@@ -24,6 +26,8 @@ app.include_router(residents.router)
 app.include_router(units.router)
 app.include_router(vehicles.router)
 app.include_router(pets.router)
+app.include_router(areas.router)
+app.include_router(bookings.router)
 
 
 @app.get("/")

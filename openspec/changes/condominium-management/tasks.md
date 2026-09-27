@@ -64,9 +64,9 @@
 
 ## 9. Common areas and bookings (common-area-scheduling)
 
-- [ ] 9.1 Common-area endpoints (síndico/administrator)
-- [ ] 9.2 Booking endpoints with atomic overlap checking and reserved/cancelled status
-- [ ] 9.3 Booking scope: residents only their own; síndico/administrator all
+- [x] 9.1 Common-area endpoints (síndico/administrator)
+- [x] 9.2 Booking endpoints with atomic overlap checking and reserved/cancelled status
+- [x] 9.3 Booking scope: residents only their own; síndico/administrator all
 - [ ] 9.4 Booking screen with conflict display and cancellation
 
 ## 10. Financial (financial)
