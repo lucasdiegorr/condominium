@@ -57,9 +57,9 @@
 
 ## 8. Vehicles and pets (vehicles-pets)
 
-- [ ] 8.1 Vehicle endpoints with responsible resident + unit and unique plate per condominium
-- [ ] 8.2 Vehicle self-service: residents manage only their own; síndico/administrator the whole condominium
-- [ ] 8.3 Pet endpoints linked to the resident with self-service
+- [x] 8.1 Vehicle endpoints with responsible resident + unit and unique plate per condominium
+- [x] 8.2 Vehicle self-service: residents manage only their own; síndico/administrator the whole condominium
+- [x] 8.3 Pet endpoints linked to the resident with self-service
 - [ ] 8.4 Vehicles and pets screens per profile
 
 ## 9. Common areas and bookings (common-area-scheduling)

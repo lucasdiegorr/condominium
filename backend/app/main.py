@@ -2,7 +2,15 @@
 
 from fastapi import FastAPI
 
-from app.api.routes import admin, auth, health, residents, units
+from app.api.routes import (
+    admin,
+    auth,
+    health,
+    pets,
+    residents,
+    units,
+    vehicles,
+)
 from app.config import get_settings
 
 settings = get_settings()
@@ -14,6 +22,8 @@ app.include_router(auth.router)
 app.include_router(admin.router)
 app.include_router(residents.router)
 app.include_router(units.router)
+app.include_router(vehicles.router)
+app.include_router(pets.router)
 
 
 @app.get("/")

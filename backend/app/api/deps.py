@@ -155,9 +155,22 @@ def require_permission(permission: str) -> Callable:
     return dependency
 
 
-async def require_scope_matches(
-    condominium_id: int, scope: Scope = Depends(current_scope)
-) -> Scope:
+def require_any_permission(*permissions: str) -> Callable:
+    """Dependency factory: grant when the scope holds AT LEAST ONE permission.
+
+    Used for self-service routes where condômino/inquilino act on their own
+    records and síndico/administrator on the whole condominium.
+    """
+
+    async def dependency(scope: Scope = Depends(current_scope)) -> Scope:
+        if not any(scope.has_permission(permission) for permission in permissions):
+            raise _forbidden()
+        return scope
+
+    return dependency
+
+
+def require_scope_matches(condominium_id: int, scope: Scope = Depends(current_scope)) -> Scope:
     """Dependency: reject when the path condominium differs from the scope.
 
     Even the global administrator only operates data through the condominium
