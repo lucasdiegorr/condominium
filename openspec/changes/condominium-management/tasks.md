@@ -44,15 +44,15 @@
 
 ## 6. Persons and residents (people)
 
-- [ ] 6.1 Person registration endpoints (síndico in own condominium; global administrator)
-- [ ] 6.2 Unit-link endpoints (condômino/inquilino) with multiple links per person and per unit
-- [ ] 6.3 User account creation linked to a person (unique e-mail)
+- [x] 6.1 Person registration endpoints (síndico in own condominium; global administrator)
+- [x] 6.2 Unit-link endpoints (condômino/inquilino) with multiple links per person and per unit
+- [x] 6.3 User account creation linked to a person (unique e-mail)
 - [ ] 6.4 Residents screen (listing and registration with links)
 
 ## 7. Units and parking spots (unit-management)
 
-- [ ] 7.1 Unit CRUD endpoints with ideal-fraction validation (positive and sum ≤ 100%)
-- [ ] 7.2 Parking-spot endpoints tied to units of the same condominium
+- [x] 7.1 Unit CRUD endpoints with ideal-fraction validation (positive and sum ≤ 100%)
+- [x] 7.2 Parking-spot endpoints tied to units of the same condominium
 - [ ] 7.3 Units and parking spots screen
 
 ## 8. Vehicles and pets (vehicles-pets)

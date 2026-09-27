@@ -13,6 +13,7 @@ from app.db import SessionLocal
 from app.models import Person, User
 
 _cpf_base = itertools.count(903704891)
+_role_email_counter = itertools.count(1)
 
 
 def _cpf_check_digit(base: str) -> str:
@@ -90,3 +91,30 @@ async def create_condominium_api(
     )
     assert response.status_code == 201, response.text
     return response.json()
+
+
+async def role_scoped_token(
+    client: AsyncClient,
+    condominium_id: int,
+    role: str,
+    email: str,
+    password: str = "secret123",
+) -> str:
+    """Create a user holding `role` in the condominium; return a scoped token.
+
+    The e-mail address is made unique with a global counter so repeated calls
+    across tests in the same database never collide.
+    """
+    from app.models import Membership, MembershipRole
+
+    local, domain = email.split("@")
+    unique_email = f"{local}-{next(_role_email_counter)}@{domain}"
+    _, user_id = await create_person_user(email=unique_email, password=password)
+    async with SessionLocal() as session:
+        membership = Membership(user_id=user_id, condominium_id=condominium_id, active=True)
+        session.add(membership)
+        await session.flush()
+        session.add(MembershipRole(membership_id=membership.id, role=role))
+        await session.commit()
+    identity = await login_identity(client, unique_email, password)
+    return await select_scoped(client, identity, condominium_id)
