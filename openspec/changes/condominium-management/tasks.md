@@ -32,7 +32,7 @@
 - [x] 4.2 Administrator role-management endpoints: create/edit/remove `membership_roles` and `member_links` (unit selection for links)
 - [x] 4.3 Global administrator operation in any condominium (elevated permissions inside the scope)
 - [x] 4.4 Rule: creating a unit link for a user guarantees a `membership`; a resident without an account gets only a `member_link`
-- [ ] 4.5 Administrator screen: binding a user/person to roles per condominium (unit selection when applicable)
+- [x] 4.5 Administrator screen: binding a user/person to roles per condominium (unit selection when applicable)
 - [x] 4.6 Permission tests per role (403 for actions outside the role, including function management by the síndico)
 
 ## 5. Condominiums (condominium-management)
@@ -47,27 +47,27 @@
 - [x] 6.1 Person registration endpoints (síndico in own condominium; global administrator)
 - [x] 6.2 Unit-link endpoints (condômino/inquilino) with multiple links per person and per unit
 - [x] 6.3 User account creation linked to a person (unique e-mail)
-- [ ] 6.4 Residents screen (listing and registration with links)
+- [x] 6.4 Residents screen (listing and registration with links)
 
 ## 7. Units and parking spots (unit-management)
 
 - [x] 7.1 Unit CRUD endpoints with ideal-fraction validation (positive and sum ≤ 100%)
 - [x] 7.2 Parking-spot endpoints tied to units of the same condominium
-- [ ] 7.3 Units and parking spots screen
+- [x] 7.3 Units and parking spots screen
 
 ## 8. Vehicles and pets (vehicles-pets)
 
 - [x] 8.1 Vehicle endpoints with responsible resident + unit and unique plate per condominium
 - [x] 8.2 Vehicle self-service: residents manage only their own; síndico/administrator the whole condominium
 - [x] 8.3 Pet endpoints linked to the resident with self-service
-- [ ] 8.4 Vehicles and pets screens per profile
+- [x] 8.4 Vehicles and pets screens per profile
 
 ## 9. Common areas and bookings (common-area-scheduling)
 
 - [x] 9.1 Common-area endpoints (síndico/administrator)
 - [x] 9.2 Booking endpoints with atomic overlap checking and reserved/cancelled status
 - [x] 9.3 Booking scope: residents only their own; síndico/administrator all
-- [ ] 9.4 Booking screen with conflict display and cancellation
+- [x] 9.4 Booking screen with conflict display and cancellation
 
 ## 10. Financial (financial)
 
@@ -76,16 +76,16 @@
 - [x] 10.3 Ideal-fraction allocation and monthly invoice generation per unit
 - [x] 10.4 Manual payment recording and paid/pending/overdue status
 - [x] 10.5 Balance sheet: expenses × incomes per category, period result, per-unit summary
-- [ ] 10.6 Financial screens scoped by role (síndico operation; resident consultation of their own unit)
+- [x] 10.6 Financial screens scoped by role (síndico operation; resident consultation of their own unit)
 
 ## 11. Frontend — application and UX
 
-- [ ] 11.1 Public login and condominium selection flow (scoped token)
-- [ ] 11.2 API/state layer with scoped-token propagation, field visibility per role and UI text via i18n (English default; pt-BR only in the translation catalog)
-- [ ] 11.3 Síndico operation screens (units, residents, vehicles/pets, bookings, financial)
-- [ ] 11.4 Administrator screens (condominiums, users, roles)
-- [ ] 11.5 Resident self-service (bookings, own vehicles/pets, financial of their own unit)
-- [ ] 11.6 401/403 handling (expired/no scope) redirecting to selection/login
+- [x] 11.1 Public login and condominium selection flow (scoped token)
+- [x] 11.2 API/state layer with scoped-token propagation, field visibility per role and UI text via i18n (English default; pt-BR only in the translation catalog)
+- [x] 11.3 Síndico operation screens (units, residents, vehicles/pets, bookings, financial)
+- [x] 11.4 Administrator screens (condominiums, users, roles)
+- [x] 11.5 Resident self-service (bookings, own vehicles/pets, financial of their own unit)
+- [x] 11.6 401/403 handling (expired/no scope) redirecting to selection/login
 
 ## 12. Integration and deployment
 

@@ -12,7 +12,7 @@ from sqlalchemy.orm import selectinload
 
 from app.core.cpf import validate_cpf
 from app.core.security import hash_password
-from app.models import MemberLink, Person, Unit, User
+from app.models import MemberLink, Membership, Person, Unit, User
 from app.services import roles_service
 
 
@@ -198,5 +198,25 @@ async def create_account(
 
     account = User(email=email, password_hash=hash_password(password), person_id=person_id)
     session.add(account)
+    await session.flush()
+
+    # Rule 4.4 mirror: a linked unit guarantees membership regardless of the
+    # order in which account/link were created. If the person already holds a
+    # unit link in this condominium, an active membership is ensured.
+    linked = await session.scalar(
+        select(MemberLink)
+        .join(Unit, Unit.id == MemberLink.unit_id)
+        .where(MemberLink.person_id == person_id, Unit.condominium_id == condominium_id)
+    )
+    if linked is not None:
+        membership = await session.scalar(
+            select(Membership).where(
+                Membership.user_id == account.id,
+                Membership.condominium_id == condominium_id,
+            )
+        )
+        if membership is None:
+            session.add(Membership(user_id=account.id, condominium_id=condominium_id, active=True))
+
     await session.commit()
     return {"person_id": person_id, "email": email}

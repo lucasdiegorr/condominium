@@ -10,18 +10,322 @@
 body {
   margin: 0;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
 }
 
 main {
   width: 100%;
-  max-width: 720px;
 }
 
 .form-error {
   color: #b3261e;
+}
+
+.muted {
+  opacity: 0.65;
+}
+
+.hint {
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+.ok-note {
+  color: #2e7d32;
+}
+
+/* ------------------------------------------------------------------ */
+/* App shell                                                           */
+/* ------------------------------------------------------------------ */
+
+.app-frame {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #333;
+}
+
+.app-bar-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.app-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+}
+
+.app-nav {
+  width: 220px;
+  flex-shrink: 0;
+  padding: 1rem 0.75rem;
+  border-right: 1px solid #333;
+}
+
+.app-content {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 1100px;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.nav-section-label {
+  padding: 0.35rem 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.nav-section-title {
+  margin: 0.75rem 0 0.25rem;
+  padding: 0.35rem 0.5rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.nav-list a {
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.nav-list a.active {
+  background: #333;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ */
+/* Cards, lists, tables                                                */
+/* ------------------------------------------------------------------ */
+
+.card {
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.card-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.card-list > .card {
+  margin-bottom: 0;
+}
+
+.card.is-muted {
+  opacity: 0.6;
+}
+
+.row-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.row-head > strong {
+  margin-right: auto;
+}
+
+.row-actions {
+  display: inline-flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.sub-section {
+  margin-top: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #444;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sub-section ul,
+.flat-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.flat-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.25rem 0;
+}
+
+.badge {
+  font-size: 0.78rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid #666;
+}
+
+.badge.ok {
+  border-color: #2e7d32;
+  color: #4caf50;
+}
+
+.badge.warn {
+  border-color: #b26a00;
+  color: #e6a23c;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.5rem 0;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #444;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.data-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ */
+/* Forms                                                               */
+/* ------------------------------------------------------------------ */
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+label.check {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+input,
+select,
+button {
+  padding: 0.45rem 0.6rem;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.inline-form > label {
+  margin-bottom: 0;
+}
+
+.inline-form > button {
+  margin-bottom: 0.25rem;
+}
+
+.check-group {
+  display: inline-flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------------------------------------ */
+/* Misc                                                                */
+/* ------------------------------------------------------------------ */
+
+.page-header {
+  margin-bottom: 1rem;
+}
+
+.page-header h2 {
+  margin: 0 0 0.25rem;
+}
+
+.page-header p {
+  margin: 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.tabs button.is-active {
+  background: #333;
+  border-color: #666;
+}
+
+.sheet-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.result-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selection-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .condominium-list {
@@ -41,22 +345,6 @@ main {
   border-radius: 8px;
 }
 
-label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  margin-bottom: 0.75rem;
-}
-
-input,
-button {
-  padding: 0.5rem 0.75rem;
-}
-
-button {
-  cursor: pointer;
-}
-
 .app-header {
   display: flex;
   justify-content: space-between;
@@ -68,4 +356,13 @@ button {
   gap: 1rem;
   list-style: none;
   padding: 0;
+}
+
+.locale-switch {
+  display: inline-flex;
+}
+
+.locale-switch button.is-active {
+  background: #333;
+  border-color: #666;
 }

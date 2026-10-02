@@ -2,22 +2,30 @@ import { useAuth } from "../auth/AuthContext";
 import { t } from "../i18n";
 
 export default function HomePage() {
-  const { condominium, signOut } = useAuth();
+  const { condominium, roles } = useAuth();
 
   return (
-    <div className="app-shell">
-      <header className="app-header">
-        <h1>{t("app.title")}</h1>
-        <button type="button" onClick={signOut}>
-          {t("app.logout")}
-        </button>
-      </header>
-      <main>
+    <div>
+      <div className="page-header">
         <h2>{t("home.welcome")}</h2>
-        <p>
+        <p className="muted">
           {t("home.condominium")}: <strong>{condominium?.name}</strong>
         </p>
-      </main>
+      </div>
+      <section className="card">
+        <h3>{t("home.yourRoles")}</h3>
+        {roles.length === 0 ? (
+          <p className="muted">{t("common.none")}</p>
+        ) : (
+          <span className="check-group">
+            {roles.map((role) => (
+              <span key={role} className="badge">
+                {t(`role.${role}`)}
+              </span>
+            ))}
+          </span>
+        )}
+      </section>
     </div>
   );
 }

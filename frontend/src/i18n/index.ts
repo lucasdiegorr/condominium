@@ -6,6 +6,7 @@
  * Brazilian Portuguese lives only in the pt-BR catalog.
  */
 
+import { useSyncExternalStore } from "react";
 import en from "./en.json";
 import ptBR from "./pt-BR.json";
 
@@ -15,6 +16,7 @@ type CatalogValue = string | { [key: string]: CatalogValue };
 type Catalog = Record<string, string>;
 
 const STORAGE_KEY = "condominium.locale";
+const listeners = new Set<() => void>();
 
 function flattenCatalog(value: CatalogValue, prefix = ""): Catalog {
   const flat: Catalog = {};
@@ -42,6 +44,19 @@ export function getLocale(): Locale {
 
 export function setLocale(locale: Locale): void {
   localStorage.setItem(STORAGE_KEY, locale);
+  listeners.forEach((listener) => listener());
+}
+
+function subscribeLocale(listener: () => void): () => void {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+}
+
+/** Reactive locale — components re-render when the language changes. */
+export function useLocale(): Locale {
+  return useSyncExternalStore(subscribeLocale, getLocale);
 }
 
 /** Translate a dot-notation key, e.g. t("login.title"). Supports {param} interpolation. */

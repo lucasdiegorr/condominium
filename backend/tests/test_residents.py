@@ -272,6 +272,51 @@ async def test_only_administrator_creates_accounts(
 
 
 @pytest.mark.asyncio
+async def test_account_after_link_guarantees_active_membership(
+    client: AsyncClient, people_scope: tuple[int, str, str]
+) -> None:
+    """Order-independence of rule 4.4 (regression): a unit link created BEFORE
+    the account must still yield an active membership, so the condominium is
+    selectable — the account creation path can no longer miss the membership."""
+    condo_id, admin, sindico = people_scope
+    person_id = await create_person_only(name="Late Login")
+    unit_id = await seed_unit(condo_id, "A-104")
+
+    link = await client.post(
+        f"/residents/{person_id}/links",
+        headers=bearer(sindico),
+        json={"role": "inquilino", "unit_id": unit_id},
+    )
+    assert link.status_code == 201, link.text
+
+    scoped_admin = await select_scoped(client, admin, condo_id)
+    response = await client.post(
+        f"/residents/{person_id}/account",
+        headers=bearer(scoped_admin),
+        json={"email": "late-login@example.com", "password": "a-strong-pass"},
+    )
+    assert response.status_code == 201, response.text
+
+    async with SessionLocal() as session:
+        user = await session.scalar(select(User).where(User.email == "late-login@example.com"))
+        assert user is not None
+        membership = await session.scalar(
+            select(Membership).where(
+                Membership.user_id == user.id,
+                Membership.condominium_id == condo_id,
+            )
+        )
+    assert membership is not None and membership.active
+
+    # The person can now sign in and select the condominium.
+    identity = await login_identity(client, "late-login@example.com", "a-strong-pass")
+    selectable = await client.post(
+        f"/auth/condominiums/{condo_id}/select", headers=bearer(identity)
+    )
+    assert selectable.status_code == 200, selectable.text
+
+
+@pytest.mark.asyncio
 async def test_sindico_cannot_create_account(
     client: AsyncClient, people_scope: tuple[int, str, str]
 ) -> None:
