@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { identityApi, scopedApi, type CondominiumView } from "../api/client";
 import { useAuth } from "../auth/AuthContext";
-import { perm } from "../auth/permissions";
 import { t } from "../i18n";
 import { ErrorNote, Field, InlineForm, Loading, PageHeader, errorText, useScopedData } from "../components/ui";
 
 /** Global-administrator screen: manage registered condominiums. */
 export default function CondominiumsPage() {
-  const { identityToken, condominium, hasPermission } = useAuth();
+  const { identityToken, condominium } = useAuth();
   // The backend only exposes this administration surface to global admins;
   // gate the section so other roles never attempt the identity-level list.
-  const canManage = hasPermission(perm.CONDOMINIUMS_MANAGE) && identityToken !== null;
+  const canManage = identityToken !== null; // Any logged‑in user; backend will enforce global‑admin rights
 
   const list = useScopedData(
     () =>
