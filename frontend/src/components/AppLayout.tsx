@@ -5,7 +5,7 @@ import { setLocale, t, useLocale, type Locale } from "../i18n";
 
 /** Application shell: header with locale switch + role-aware sidebar navigation. */
 export default function AppLayout() {
-  const { condominium, roles, hasPermission, signOut } = useAuth();
+  const { identityToken, condominium, roles, hasPermission, signOut } = useAuth();
   const navigate = useNavigate();
   const locale = useLocale();
 
@@ -42,7 +42,8 @@ export default function AppLayout() {
     {
       to: "/app/condominiums",
       label: t("navigation.condominiums"),
-      show: hasPermission(perm.CONDOMINIUMS_MANAGE),
+      // Global admin can manage condos before any scope exists.
+      show: identityToken !== null,
     },
   ];
 
