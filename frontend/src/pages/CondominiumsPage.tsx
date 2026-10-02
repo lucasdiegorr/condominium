@@ -9,7 +9,7 @@ export default function CondominiumsPage() {
   const { identityToken, condominium } = useAuth();
   // The backend only exposes this administration surface to global admins;
   // gate the section so other roles never attempt the identity-level list.
-  const canManage = identityToken !== null; // Any logged‑in user; backend will enforce global‑admin rights
+  const canManage = identityToken !== null;
 
   const list = useScopedData(
     () =>
