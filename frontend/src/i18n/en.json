@@ -39,7 +39,8 @@
   "selection": {
     "title": "Select a condominium",
     "empty": "You are not associated with any condominium yet. Contact your administrator.",
-    "select": "Enter"
+    "select": "Enter",
+    "manageCondo": "Manage condominiums"
   },
   "navigation": {
     "home": "Home",

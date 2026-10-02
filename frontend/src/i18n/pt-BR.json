@@ -39,7 +39,8 @@
   "selection": {
     "title": "Selecione um condomínio",
     "empty": "Você ainda não está associado a nenhum condomínio. Fale com o administrador.",
-    "select": "Entrar"
+    "select": "Entrar",
+    "manageCondo": "Gerenciar condomínios"
   },
   "navigation": {
     "home": "Início",

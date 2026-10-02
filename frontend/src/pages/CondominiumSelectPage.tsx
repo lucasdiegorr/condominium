@@ -81,9 +81,14 @@ export default function CondominiumSelectPage() {
           ))}
         </ul>
       )}
-      <button type="button" onClick={signOut}>
-        {t("app.logout")}
-      </button>
+      <div className="selection-actions">
+        <button type="button" onClick={() => navigate("/app/condominiums")}>
+          {t("selection.manageCondo")}
+        </button>
+        <button type="button" onClick={signOut}>
+          {t("app.logout")}
+        </button>
+      </div>
     </main>
   );
 }
