@@ -110,8 +110,8 @@ npm run build
 
 | Variable | Default | Description |
 | --- | --- | --- |
-| `POSTGRES_USER` / `POSTGRES_PASSWORD` / `POSTGRES_DB` | `cond` / `cond_pass` / `condominium` | PostgreSQL credentials (compose) |
-| `DATABASE_URL` | `postgresql+asyncpg://cond:cond_pass@postgres:5432/condominium` | Backend database URL |
+| `POSTGRES_USER` / `POSTGRES_PASSWORD` / `POSTGRES_DB` | `cond` / `cond_pass` / `condominium` | PostgreSQL credentials (compose). The backend composes `DATABASE_URL` from them, so `POSTGRES_PASSWORD` may contain special characters (`%`, `@`, `:`, ...) |
+| `DATABASE_URL` | *(composed)* | Optional override that takes precedence over the `POSTGRES_*` components |
 | `JWT_SECRET` | `change-me-in-production` | **Change in production** |
 | `JWT_ALGORITHM` | `HS256` | Token signing algorithm |
 | `IDENTITY_TOKEN_TTL_MINUTES` | `60` | Identity token lifetime |

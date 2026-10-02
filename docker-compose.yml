@@ -24,10 +24,15 @@ services:
     pull_policy: always
     restart: unless-stopped
     environment:
-      # Derive DATABASE_URL from POSTGRES_* so credentials stay in sync when
-      # the stack env overrides the DB user/password/name. An explicit
-      # DATABASE_URL in the stack env still wins.
-      DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://${POSTGRES_USER:-cond}:${POSTGRES_PASSWORD:-cond_pass}@postgres:5432/${POSTGRES_DB:-condominium}}
+      # Backend builds DATABASE_URL from these components (with proper
+      # percent-encoding), so passwords with % @ : etc. work. An explicit
+      # DATABASE_URL in the stack env still takes precedence.
+      POSTGRES_USER: ${POSTGRES_USER:-cond}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-cond_pass}
+      POSTGRES_DB: ${POSTGRES_DB:-condominium}
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      DATABASE_URL: ${DATABASE_URL:-}
       JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
       JWT_ALGORITHM: ${JWT_ALGORITHM:-HS256}
       IDENTITY_TOKEN_TTL_MINUTES: ${IDENTITY_TOKEN_TTL_MINUTES:-60}
