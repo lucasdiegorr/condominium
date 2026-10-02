@@ -1,0 +1,70 @@
+# Publishes the backend and frontend images to GitHub Container Registry (GHCR)
+# on every push to master. Portainer deploys these prebuilt images via the
+# image-based docker-compose.yml (build: is not supported on Agent-managed
+# environments; see AGENTS.md / README).
+name: publish-images
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push backend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./backend
+          file: ./backend/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/lucasdiegorr/condominium-backend:latest
+            ghcr.io/lucasdiegorr/condominium-backend:${{ github.sha }}
+
+      - name: Build and push frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          file: ./frontend/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/lucasdiegorr/condominium-frontend:latest
+            ghcr.io/lucasdiegorr/condominium-frontend:${{ github.sha }}
+
+      # Best effort: GHCR packages default to private, and Portainer pulls
+      # anonymously, so make them public. If the token cannot change
+      # visibility, do it manually in GitHub → Packages → <package> → Package
+      # settings → Change visibility → Public.
+      - name: Make packages public (best effort)
+        continue-on-error: true
+        run: |
+          for pkg in condominium-backend condominium-frontend; do
+            if gh api \
+              --method POST \
+              -H "Accept: application/vnd.github+json" \
+              /user/packages/container/$pkg/visibility \
+              -f visibility=public >/dev/null 2>&1; then
+              echo "::notice::$pkg is public"
+            else
+              echo "::warning::Could not auto-publicize $pkg — set it to public manually in the GitHub UI."
+            fi
+          done

@@ -16,8 +16,12 @@ services:
       timeout: 5s
       retries: 10
 
+  # Prebuilt images published to GHCR by .github/workflows/publish.yml.
+  # Building images inside an Agent-managed (remote) Portainer environment is
+  # not supported (BuildKit gRPC is not relayed) — compose deploys by pull.
   backend:
-    build: ./backend
+    image: ghcr.io/lucasdiegorr/condominium-backend:latest
+    pull_policy: always
     restart: unless-stopped
     environment:
       DATABASE_URL: ${DATABASE_URL:-postgresql+asyncpg://cond:cond_pass@postgres:5432/condominium}
@@ -34,7 +38,8 @@ services:
         condition: service_healthy
 
   frontend:
-    build: ./frontend
+    image: ghcr.io/lucasdiegorr/condominium-frontend:latest
+    pull_policy: always
     restart: unless-stopped
     ports:
       - "${FRONTEND_PORT:-8080}:80"
