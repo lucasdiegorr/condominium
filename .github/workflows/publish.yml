@@ -7,6 +7,12 @@ name: publish-images
 on:
   push:
     branches: [master]
+    # Only (re)build when container sources or the workflow itself change;
+    # docs/spec/compose-only commits must not trigger a multi-arch rebuild.
+    paths:
+      - "backend/**"
+      - "frontend/**"
+      - ".github/workflows/publish.yml"
   workflow_dispatch:
 
 permissions:
