@@ -89,7 +89,7 @@
 
 ## 12. Integration and deployment
 
-- [ ] 12.1 Docker Compose working end to end (postgres → backend → frontend)
-- [ ] 12.2 Automatic migrations at startup with idempotent seeds
-- [ ] 12.3 Integration tests of the main flows of each capability
-- [ ] 12.4 Documentation (README with setup, environment variables, execution) and final check (`openspec validate`)
+- [x] 12.1 Docker Compose working end to end (postgres → backend → frontend)
+- [x] 12.2 Automatic migrations at startup with idempotent seeds
+- [x] 12.3 Integration tests of the main flows of each capability
+- [x] 12.4 Documentation (README with setup, environment variables, execution) and final check (`openspec validate`)
